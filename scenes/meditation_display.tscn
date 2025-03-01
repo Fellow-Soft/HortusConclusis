@@ -1,0 +1,125 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/meditation_display.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://dkk3wqcnvyu7t" path="res://assets/fonts/medieval/medieval_font.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7m2p"]
+bg_color = Color(0.8, 0.7, 0.5, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MeditationDisplay" type="Node"]
+script = ExtResource("1_script")
+
+[node name="MeditationPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="MeditationPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.1, 0.85)
+
+[node name="TitleLabel" type="Label" parent="MeditationPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 40.0
+offset_bottom = 100.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.8, 0.7, 0.5, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 28
+text = "The Garden Speaks"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MeditationPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 120.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MeditationText" type="RichTextLabel" parent="MeditationPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.9, 0.9, 0.8, 1)
+theme_override_fonts/normal_font = ExtResource("2_font")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "I am the garden enclosed, neither wilderness nor void,  
+But a space between—ordered yet alive,  
+Bounded yet infinite in contemplation.
+
+My walls do not imprison but protect,  
+Creating stillness where wisdom may take root,  
+Where patterns reveal themselves to the patient eye.
+
+Enter with intention, wanderer,  
+For my paths are not random but purposeful,  
+Leading both outward to beauty and inward to understanding."
+
+[node name="NextButton" type="Button" parent="MeditationPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -80.0
+offset_right = -50.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_k7m2p")
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 20
+text = "Next"
+
+[node name="CloseButton" type="Button" parent="MeditationPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "×"
+
+[node name="InstructionLabel" type="Label" parent="MeditationPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -60.0
+offset_right = 350.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+text = "Press Space or Enter to continue"
+vertical_alignment = 1

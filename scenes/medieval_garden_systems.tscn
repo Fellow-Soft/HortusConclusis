@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/plants/growth_system.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/plants/plant_generator.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/l_system.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/medieval_garden_demo.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/ai/ambrose_godot_bridge.gd" id="5"]
+
+[node name="MedievalGardenSystems" type="Node3D"]
+script = ExtResource("4")
+
+[node name="GrowthSystem" type="Node" parent="." groups=["growth_system"]]
+script = ExtResource("1")
+
+[node name="PlantGenerator" type="Node" parent="." groups=["plant_generator"]]
+script = ExtResource("2")
+
+[node name="LSystem" type="Node" parent="." groups=["l_system"]]
+script = ExtResource("3")
+
+[node name="Plants" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 5, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+size = Vector3(20, 0.2, 20)
+
+[node name="AmbroseInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChatPanel" type="Panel" parent="AmbroseInterface"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ChatOutput" type="TextEdit" parent="AmbroseInterface/ChatPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+editable = false
+
+[node name="ChatInput" type="LineEdit" parent="AmbroseInterface/ChatPanel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+placeholder_text = "Speak to Ambrose..."
+
+[node name="AmbroseAgent" type="Node" parent="." groups=["ambrose_agent"]]
+script = ExtResource("5")
+chat_panel_path = NodePath("../AmbroseInterface/ChatPanel")
+chat_input_path = NodePath("../AmbroseInterface/ChatPanel/ChatInput")
+chat_output_path = NodePath("../AmbroseInterface/ChatPanel/ChatOutput")

@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8j5q2yvx6n8p"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j7r2q"]
+size = Vector3(2, 0.2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ykxv"]
+albedo_color = Color(0.6, 0.4, 0.2, 1)
+
+[node name="FlowerBed" type="Node3D"]
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_j7r2q")
+surface_material_override/0 = SubResource("StandardMaterial3D_8ykxv")
+
+[node name="Flowers" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="Flower1" type="CSGCylinder3D" parent="Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.3, 0.5)
+radius = 0.1
+height = 0.6
+material = SubResource("StandardMaterial3D_8ykxv")
+
+[node name="Flower2" type="CSGCylinder3D" parent="Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.3, 0.5)
+radius = 0.1
+height = 0.6
+material = SubResource("StandardMaterial3D_8ykxv")
+
+[node name="Flower3" type="CSGCylinder3D" parent="Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.3, -0.5)
+radius = 0.1
+height = 0.6
+material = SubResource("StandardMaterial3D_8ykxv")
+
+[node name="Flower4" type="CSGCylinder3D" parent="Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.3, -0.5)
+radius = 0.1
+height = 0.6
+material = SubResource("StandardMaterial3D_8ykxv")
+
+[node name="Flower5" type="CSGCylinder3D" parent="Flowers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+radius = 0.1
+height = 0.8
+material = SubResource("StandardMaterial3D_8ykxv")
