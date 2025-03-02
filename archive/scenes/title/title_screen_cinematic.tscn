@@ -1,0 +1,117 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/illuminated_title.gd" id="1_fgd5q"]
+[ext_resource type="FontFile" path="res://assets/fonts/medieval/medieval_font.ttf" id="2_q5mfj"]
+[ext_resource type="Shader" path="res://scripts/shaders/parchment_shader.gdshader" id="3_63ubw"]
+
+[sub_resource type="Environment" id="Environment_kd5q2"]
+background_mode = 2
+ambient_light_color = Color(0.7, 0.7, 0.8, 1)
+ambient_light_energy = 0.5
+glow_enabled = true
+glow_bloom = 0.2
+fog_enabled = true
+fog_light_color = Color(0.85, 0.9, 0.95, 1)
+fog_density = 0.001
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvn4q"]
+shader = ExtResource("3_63ubw")
+shader_parameter/age = 0.7
+shader_parameter/noise_scale = 4.0
+shader_parameter/texture_distortion = 0.1
+shader_parameter/parchment_color = Color(0.95, 0.9, 0.75, 1)
+shader_parameter/aging_color = Color(0.85, 0.75, 0.55, 1)
+shader_parameter/ink_color = Color(0.2, 0.1, 0.05, 1)
+shader_parameter/illumination_intensity = 0.4
+shader_parameter/gold_color = Color(1, 0.85, 0.3, 1)
+shader_parameter/animation_speed = 0.2
+
+[node name="TitleScreenCinematic" type="Node3D"]
+script = ExtResource("1_fgd5q")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kd5q2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 0)
+light_color = Color(1, 0.9, 0.8, 1)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
+current = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ParchmentTexture" type="TextureRect" parent="UI"]
+material = SubResource("ShaderMaterial_kvn4q")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="BorderContainer" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="RichTextLabel" parent="UI"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 180.0
+offset_right = 400.0
+offset_bottom = 280.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_q5mfj")
+theme_override_font_sizes/normal_font_size = 54
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="SubtitleLabel" type="RichTextLabel" parent="UI"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 260.0
+offset_right = 400.0
+offset_bottom = 360.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_q5mfj")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="FadeOverlay" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

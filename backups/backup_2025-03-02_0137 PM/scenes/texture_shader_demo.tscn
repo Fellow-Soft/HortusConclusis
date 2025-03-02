@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqnxqxq8y6j5v"]
+
+[ext_resource type="Script" path="res://scripts/texture_shader_demo.gd" id="1_yvnqd"]
+
+[node name="TextureShaderDemo" type="Node3D"]
+script = ExtResource("1_yvnqd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2, 5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 0, 4, 0)
+shadow_enabled = true
+
+[node name="Instructions" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 420.0
+offset_bottom = 150.0
+text = "Medieval Texture & Shader Generator Demo
+
+This demo allows you to generate procedural textures and shaders for the Hortus Conclusus project.
+
+Controls:
+G - Generate all textures
+S - Apply shaders to materials
+D - Create demo objects with materials"

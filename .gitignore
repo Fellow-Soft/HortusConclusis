@@ -2,7 +2,6 @@
 .import/
 export.cfg
 export_presets.cfg
-.godot/
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -10,30 +9,10 @@ export_presets.cfg
 # Mono-specific ignores
 .mono/
 data_*/
-mono_crash.*.json
 
-# System/tool-specific ignores
+# API keys and sensitive information
+scripts/ai/config.py
+scripts/ai/test_claude_api.py
+
+# System files
 .DS_Store
-*.swp
-.vscode/
-.idea/
-*~
-
-# Build artifacts
-*.o
-*.os
-*.obj
-*.bc
-*.pyc
-*.dblite
-*.pdb
-*.lib
-*.config
-*.creator
-*.creator.user
-*.files
-*.includes
-*.idb
-
-# Logs
-*.log

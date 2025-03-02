@@ -1,0 +1,187 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/ai/ambrose_godot_bridge.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/ui/medieval/portrait_frame.png" id="2_frame"]
+[ext_resource type="Texture2D" path="res://assets/ui/medieval/parchment_bg.png" id="3_parchment"]
+[ext_resource type="FontFile" path="res://assets/fonts/medieval/medieval_font.ttf" id="4_font"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j8m2p"]
+texture = ExtResource("3_parchment")
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 20.0
+margin_bottom = 20.0
+region_rect = Rect2(0, 0, 512, 512)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k7m2p"]
+texture = ExtResource("3_parchment")
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 10.0
+margin_bottom = 10.0
+region_rect = Rect2(0, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l8n3p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_frame")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_frame")
+}],
+"loop": true,
+"name": &"speaking",
+"speed": 5.0
+}]
+
+[node name="AmbroseInterface" type="Control" groups=["ambrose_interface"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+chat_panel_path = NodePath("ChatPanel")
+chat_input_path = NodePath("ChatPanel/InputContainer/ChatInput")
+chat_output_path = NodePath("ChatPanel/OutputContainer/ChatOutput")
+voice_button_path = NodePath("ChatPanel/InputContainer/VoiceButton")
+ambrose_portrait_path = NodePath("PortraitContainer/AmbrosePortrait")
+
+[node name="PortraitContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 200.0
+grow_vertical = 2
+
+[node name="AmbrosePortrait" type="AnimatedSprite2D" parent="PortraitContainer"]
+position = Vector2(100, 200)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_l8n3p")
+animation = &"idle"
+playing = true
+
+[node name="NameLabel" type="Label" parent="PortraitContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 24
+text = "Ambrose"
+horizontal_alignment = 1
+
+[node name="ChatPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_j8m2p")
+
+[node name="TitleLabel" type="Label" parent="ChatPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 28
+text = "Converse with Ambrose, the Gardener"
+horizontal_alignment = 1
+
+[node name="OutputContainer" type="Panel" parent="ChatPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = -20.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_k7m2p")
+
+[node name="ChatOutput" type="RichTextLabel" parent="ChatPanel/OutputContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("4_font")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "Welcome to the Hortus Conclusus. Ambrose will join you shortly..."
+scroll_following = true
+
+[node name="InputContainer" type="HBoxContainer" parent="ChatPanel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -70.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="ChatInput" type="LineEdit" parent="ChatPanel/InputContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 18
+placeholder_text = "Type your message to Ambrose..."
+caret_blink = true
+
+[node name="VoiceButton" type="Button" parent="ChatPanel/InputContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 18
+text = "Speak to Ambrose"
+
+[node name="StatusLabel" type="Label" parent="ChatPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 14
+text = "Ambrose is thinking..."
+horizontal_alignment = 1

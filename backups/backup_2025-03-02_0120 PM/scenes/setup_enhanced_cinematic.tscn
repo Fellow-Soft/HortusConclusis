@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8q5j6x3yvdgr"]
+
+[ext_resource type="Script" path="res://scripts/setup_enhanced_cinematic.gd" id="1_yjkp8"]
+
+[node name="SetupEnhancedCinematic" type="Node"]
+script = ExtResource("1_yjkp8")

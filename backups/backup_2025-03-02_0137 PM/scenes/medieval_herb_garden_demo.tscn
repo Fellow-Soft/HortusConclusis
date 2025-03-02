@@ -1,0 +1,104 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/medieval_herb_garden_demo.gd" id="1_j8m2k"]
+[ext_resource type="Script" path="res://scripts/plants/medieval_herb_garden.gd" id="2_u4r2j"]
+[ext_resource type="Script" path="res://scripts/camera_system.gd" id="3_k3m4p"]
+
+[sub_resource type="Environment" id="Environment_q8w2r"]
+ambient_light_color = Color(0.8, 0.85, 0.9, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.85, 0.9, 0.95, 1)
+fog_density = 0.001
+volumetric_fog_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j6m2p"]
+albedo_color = Color(0.2, 0.3, 0.15, 1)
+roughness = 0.8
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_y8n4t"]
+size = Vector2(50, 50)
+
+[node name="MedievalHerbGardenDemo" type="Node3D"]
+script = ExtResource("1_j8m2k")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q8w2r")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0)
+light_color = Color(1, 0.95, 0.9, 1)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_j6m2p")
+mesh = SubResource("PlaneMesh_y8n4t")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 8, 15)
+script = ExtResource("3_k3m4p")
+
+[node name="MonasticGarden" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+script = ExtResource("2_u4r2j")
+
+[node name="KnotGarden" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("2_u4r2j")
+
+[node name="RaisedGarden" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+script = ExtResource("2_u4r2j")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 20.0
+offset_right = 150.0
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Medieval Herb Garden Layouts"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 60.0
+offset_right = 200.0
+offset_bottom = 86.0
+grow_horizontal = 2
+text = "Left: Monastic Garden | Center: Knot Garden | Right: Raised Garden"
+horizontal_alignment = 1
+
+[node name="Controls" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -86.0
+offset_right = 320.0
+offset_bottom = -20.0
+grow_vertical = 0
+text = "Controls:
+WASD/Arrows - Move Camera
+Q/E - Rotate Camera
+Mouse Wheel - Zoom"
